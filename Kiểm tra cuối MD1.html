@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+    </title>
+
+    <input onclick="cau1()" type="button" value="Câu 1">Cho danh sách các điểm thi ở trong một mảng. Hãy viết hàm
+    findAvg() với đầu vào là một mảng điểm và đầu ra là
+    điểm trung bình của danh sách điểm thi.
+    <br><br>
+    <input onclick="cau2()" type="button" value="Câu 2">Viết hàm insertNumberToArray() nhận
+    vào một mảng các số nguyên,
+    một số nguyên x, và một số nguyên vị trí index. Hàm trả về mảng ban đầu nếu vị trí index có giá trị nhỏ hơn 0 hoặc
+    lớn hơn chiều dài mảng. Nếu không thì trả về mảng mới đã được thêm số x vào vị trí index.
+    <br><br>
+    <input onclick="cau3()" type="button" value="Câu 3">Viết hàm sumOfListPrime() nhận vào một số nguyên x ,
+    hàm trả về
+    giá trị là tổng các số nguyên tố từ 0 cho tới x.
+    <br><br>
+    <input onclick="cau4()" type="button" value="Câu 4">Hãy viết một chương trình để biểu diễn hình chữ nhật, với mô tả
+    của lớp hình chữ nhật như sau
+    <br><br><br>
+    Hình vẽ canvas ở đây
+    <canvas id="myCanvas"></canvas>
+</head>
+<body>
+<script>
+
+    //CÂU 1 3 CÁCH
+
+    function cau1() {
+
+//CÁCH 1
+
+        let arrayPoint = [];
+        let n = +prompt("Bạn thi mấy môn?: ")
+
+        function duyetMang(n) {
+            for (let i = 0; i < n; i++) {
+                arrayPoint[i] = +prompt("Vui lòng nhập điểm vào mảng bạn vừa cung cấp" + " điểm ở vị trí mảng" + i);
+            }
+        }
+
+        function findAvg(arrayPoint) {
+            let sum = 0;
+            let avg;
+            let x = arrayPoint;
+            for (let i = 0; i < x.length; i++) {
+                sum += x[i];
+            }
+            avg = sum / (x.length);
+            return avg;
+        }
+
+        duyetMang(n);
+        alert('Điểm trung bình của bạn là: ' + findAvg(arrayPoint));
+    }
+
+    //CÁCH 2
+
+    // function finAvg() {
+    //     const arr = [10, 10, 10, 10]
+    //     let sum = 0;
+    //     for (let i of arr) {
+    //
+    //         sum += i;
+    //     }
+    //     let avg = sum / arr.length;
+    //     alert("danh sách điểm thi 3 môn Toán Lý Hóa: " + arr)
+    //     alert("điểm trung bình các môn là: " + avg)
+    //
+
+    //CÁCH 3
+
+    //
+    //
+    //     let a = 0;
+    //
+    //     function finAvg(arr) {
+    //         for (let i in arr) {
+    //             a += arr[i];
+    //         }
+    //         let avg = a / arr.length;
+    //         alert("Điểm trung bình :" + avg.toFixed(2))
+    //
+    //     }
+    //
+    //     let arr = [10, 10, 10, 10, 10, 10];
+    //     finAvg(arr)
+
+    //CÂU 2 2 CÁCH
+
+    //CÁCH 1
+    function cau2() {
+        let x = Number(prompt("Vui lòng nhập số nguyên x: "));
+        let index = Number(prompt("Vui lòng nhập index: "));
+        let arr = [];
+        let n = Number(prompt("Nhập số có phần tử trong mảng: "));
+
+        function insertNumberToArray(n) {
+            for (let i = 0; i < n; i++) {
+                arr[i] = Number(prompt('Nhập giá trị tại vị trí' + i + ": "));
+            }
+            if (arr[index] < 0 || arr[index] > arr.length) {
+                return arr;
+            } else {
+                let newArr = new Array(arr.length + 1);
+                for (let i = 0; i < newArr.length; i++) {
+                    if (i < index) {
+                        newArr[i] = arr[i];
+                    } else if (i === index) {
+                        newArr[i] = x;
+                    } else {
+                        newArr[i] = arr[i - 1];
+                    }
+                }
+                return newArr;
+            }
+        }
+
+        alert(insertNumberToArray(n));
+    }
+
+    // CÁCH 2
+    //  function cau2() {
+    //      function insertNumberToArray(array, x, index) {
+    //          for (let i = 0; i <= array.length; i++) {
+    //              if (i == index) {
+    //                  for (let j = (array.length - 1); j >= i; j--) {
+    //                      array[j + 1] = array[j];
+    //                  }
+    //                  array[i] = x;
+    //              }
+    //          }
+    //          return array
+    //      }
+    //
+    //      let arr = [1, 2, 3, 4, 5, 6]
+    //      let index = Number(prompt("Nhập số index"));
+    //      let x = Number(prompt("Nhập số x"));
+    //      let result = insertNumberToArray(arr, x, index);
+    //      alert(result)
+    //  }
+
+    //CÂU 3 2 CÁCH
+    //CÁCH 1
+
+    function cau3() {
+        let num = Number(prompt("Vui lòng nhập số nguyên x: "))
+        let sum = 0;
+        let flag = 1;
+
+        function sumOfListPrime(num) {
+            for (let j = 0; j <= num; j++) {
+                if (j < 2) {
+                    continue;
+                } else {
+                    for (let i = 2; i <= Math.sqrt(j); i++) {
+                        if (j % i === 0) {
+                            flag += 1;
+                            break;
+                        }
+                    }
+                }
+                if (flag === 1) {
+                    sum = sum + j;
+                    flag = 1;
+
+                } else {
+                    flag = 1;
+                }
+            }
+            return sum;
+        }
+
+        alert("Tổng các số nguyên tố đến x là: " + sumOfListPrime(num));
+    }
+
+    // //CÁCH 2
+    // function cau3() {
+    //     let x = Number(prompt("Vui lòng nhập số nguyên: "))
+    //     let sum = 0;
+    //
+    //     function sumOfListPrime(x) {
+    //         let check = true
+    //         for (let i = 2; i < x; i++) {
+    //             if (x % i === 0) {
+    //                 check = false;
+    //                 break;
+    //             }
+    //         }
+    //         return check;
+    //     }
+    //
+    //     for (let j = 0; j <= x; j++) {
+    //         if (sumOfListPrime(j) === true) {
+    //             sum += j
+    //         }
+    //     }
+    //     sum = sum - 1
+    //     alert(" Tổng các số nguyên tố từ 0 cho tới x là: " + sum)
+    // }
+
+
+    function cau4() {
+
+        //lớp
+        class Rectangle {
+            //thuộc tính hình chữ nhật
+            x;
+            y;
+            width;
+            height;
+            color;
+
+//hàm tạo giá trị chuyền vào
+            constructor(x, y, width, height, color) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.color = color;
+            }
+
+//phương thức
+            render(canvas) {
+                let ctx = canvas.getContext("2d");
+                ctx.fillStyle = this.color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+//gọi id
+        let canvas = document.getElementById("myCanvas");
+        //đối tượng
+        let hinhChuNhat = new Rectangle(10, 10, 200, 100, "#ff0000");
+        hinhChuNhat.render(canvas);
+    }
+
+
+</script>
+</body>
+</html>
